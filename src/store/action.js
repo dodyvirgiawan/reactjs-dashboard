@@ -9,6 +9,9 @@ import {
 } from './actionType'
 
 import candidateApi from '../apis/candidateApi'
+import isCandidateAlreadyProcessed from '../helpers/isCandidateAlreadyProcessed'
+
+import { toast } from 'react-toastify'
 
 function setCandidates(payload) {
     return {
@@ -38,21 +41,21 @@ function setLoadingCandidateDetails(payload) {
     }
 }
 
-export function addSavedCandidates(payload) {
+function addSavedCandidates(payload) {
     return {
         type: ADD_SAVED_CANDIDATES,
         payload,
     }
 }
 
-export function addAcceptedCandidates(payload) {
+function addAcceptedCandidates(payload) {
     return {
         type: ADD_ACCEPTED_CANDIDATES,
         payload,
     }
 }
 
-export function addDeclinedCandidates(payload) {
+function addDeclinedCandidates(payload) {
     return {
         type: ADD_DECLINED_CANDIDATES,
         payload,
@@ -93,6 +96,58 @@ export function fetchCandidateById(id) {
             console.log(err)
         } finally {
             dispatch(setLoadingCandidateDetails(false))
+        }
+    }
+}
+
+export function saveCandidate(candidate) {
+    return function (dispatch, getState) {
+        const { savedCandidates } = getState()
+        const foundSavedCandidates = savedCandidates.find((el) => el.id === candidate.id)
+
+        if (foundSavedCandidates) {
+            toast.error(`${candidate.name} is already saved!`)
+        } else {
+            dispatch(addSavedCandidates(candidate))
+            toast.success(`${candidate.name} successfully saved!`)
+        }
+    }
+}
+
+export function acceptCandidate(candidate) {
+    return function (dispatch, getState) {
+        const { acceptedCandidates, declinedCandidates } = getState()
+
+        const isAlreadyProcessed = isCandidateAlreadyProcessed(
+            candidate,
+            acceptedCandidates,
+            declinedCandidates
+        )
+
+        if (isAlreadyProcessed) {
+            toast.error(`${candidate.name} is already proccessed!`)
+        } else {
+            dispatch(addAcceptedCandidates(candidate))
+            toast.success(`${candidate.name} successfully accepted!`)
+        }
+    }
+}
+
+export function declineCandidate(candidate) {
+    return function (dispatch, getState) {
+        const { acceptedCandidates, declinedCandidates } = getState()
+
+        const isAlreadyProcessed = isCandidateAlreadyProcessed(
+            candidate,
+            acceptedCandidates,
+            declinedCandidates
+        )
+
+        if (isAlreadyProcessed) {
+            toast.error(`${candidate.name} is already proccessed!`)
+        } else {
+            dispatch(addDeclinedCandidates(candidate))
+            toast.success(`${candidate.name} successfully declined!`)
         }
     }
 }
