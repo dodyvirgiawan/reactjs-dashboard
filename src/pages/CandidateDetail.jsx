@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCandidateById } from '../store/action'
 
 import HeaderTitle from '../components/HeaderTitle'
+import MapMarker from '../components/MapMarker'
 import ReactLoading from 'react-loading'
+
+import GoogleMapReact from 'google-map-react'
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 export default function CandidateDetail() {
     const dispatch = useDispatch()
@@ -74,6 +78,27 @@ export default function CandidateDetail() {
                                     {candidateDetails[0]?.address?.city}
                                 </p>
                                 <p>Zipcode: {candidateDetails[0]?.address.zipcode}</p>
+                            </div>
+                            <div className="container bg-gray-200 p-3 rounded-xl mt-2">
+                                <h3 className="text-sm text-gray-600">Candidate Locations</h3>
+                                <div className="w-full h-96 mt-3">
+                                    <GoogleMapReact
+                                        bootstrapURLKeys={{
+                                            key: GOOGLE_MAPS_API_KEY,
+                                        }}
+                                        defaultCenter={{
+                                            lat: -6.2358453,
+                                            lng: 106.9227696,
+                                        }}
+                                        defaultZoom={15}
+                                    >
+                                        <MapMarker
+                                            lat={-6.2358453}
+                                            lng={106.9227696}
+                                            text="Candidate Address"
+                                        />
+                                    </GoogleMapReact>
+                                </div>
                             </div>
                         </div>
                     </>
