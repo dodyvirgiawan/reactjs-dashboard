@@ -39,3 +39,16 @@ body {
     @apply p-2;
     @apply border-2;
 }
+
+.sidebar-btn {
+    transition: all 0.2s ease-in-out;
+    @apply cursor-pointer;
+    @apply bg-gray-200;
+    @apply p-3;
+    @apply rounded-lg;
+    @apply mt-3;
+}
+
+.sidebar-btn:hover {
+    @apply bg-gray-300;
+}
