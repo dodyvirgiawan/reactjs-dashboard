@@ -3,6 +3,9 @@ import {
     SET_LOADING_CANDIDATES,
     SET_CANDIDATE_DETAILS,
     SET_LOADING_CANDIDATE_DETAILS,
+    ADD_ACCEPTED_CANDIDATES,
+    ADD_DECLINED_CANDIDATES,
+    ADD_SAVED_CANDIDATES,
 } from './actionType'
 
 const initialState = {
@@ -10,6 +13,9 @@ const initialState = {
     loadingCandidates: false,
     candidateDetails: [],
     loadingCandidateDetails: false,
+    acceptedCandidates: [],
+    declinedCandidates: [],
+    savedCandidates: [],
 }
 
 export default function reducer(state = initialState, action) {
@@ -33,6 +39,21 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loadingCandidateDetails: action.payload,
+            }
+        case ADD_ACCEPTED_CANDIDATES:
+            return {
+                ...state,
+                acceptedCandidates: [...state.acceptedCandidates, action.payload],
+            }
+        case ADD_DECLINED_CANDIDATES:
+            return {
+                ...state,
+                declinedCandidates: [...state.declinedCandidates, action.payload],
+            }
+        case ADD_SAVED_CANDIDATES:
+            return {
+                ...state,
+                savedCandidates: [...state.savedCandidates, action.payload],
             }
         default:
             return state
