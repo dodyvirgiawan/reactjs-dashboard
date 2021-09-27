@@ -6,16 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
     fetchCandidateById,
-    addAcceptedCandidates,
-    addDeclinedCandidates,
-    addSavedCandidates,
+    acceptCandidate,
+    declineCandidate,
+    saveCandidate,
 } from '../store/action'
 
 import HeaderTitle from '../components/HeaderTitle'
 import MapMarker from '../components/MapMarker'
 import ReactLoading from 'react-loading'
-
-import { toast } from 'react-toastify'
 
 import GoogleMapReact from 'google-map-react'
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -24,36 +22,11 @@ export default function CandidateDetail() {
     const dispatch = useDispatch()
     const { id } = useParams()
 
-    const { candidateDetails, loadingCandidateDetails, acceptedCandidates, declinedCandidates } =
-        useSelector((state) => state)
+    const { candidateDetails, loadingCandidateDetails } = useSelector((state) => state)
 
     useEffect(() => {
         dispatch(fetchCandidateById(id))
     }, [dispatch, id])
-
-    function isCandidateAlreadyProcessed(candidate) {
-        const foundInAccepted = acceptedCandidates.find((el) => el.id === candidate.id)
-        const foundInDeclined = declinedCandidates.find((el) => el.id === candidate.id)
-
-        return foundInAccepted || foundInDeclined ? true : false
-    }
-
-    function processCandidate(candidate, type) {
-        if (isCandidateAlreadyProcessed(candidate)) {
-            toast.error(`${candidate.name} is already processed!`)
-        } else {
-            type === 'accept'
-                ? dispatch(addAcceptedCandidates(candidate))
-                : dispatch(addDeclinedCandidates(candidate))
-
-            toast.success(`${candidate.name} successfully processed! (${type})`)
-        }
-    }
-
-    function saveCandidate(candidate) {
-        dispatch(addSavedCandidates(candidate))
-        toast.success(`${candidate.name} successfully saved!`)
-    }
 
     return (
         <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
@@ -114,7 +87,7 @@ export default function CandidateDetail() {
                             <div className="container bg-gray-200 p-3 rounded-xl mt-2">
                                 <h3 className="text-sm text-gray-600">Candidate Locations</h3>
                                 <div className="w-full h-96 mt-3">
-                                    {/* <GoogleMapReact
+                                    <GoogleMapReact
                                         bootstrapURLKeys={{
                                             key: GOOGLE_MAPS_API_KEY,
                                         }}
@@ -129,7 +102,7 @@ export default function CandidateDetail() {
                                             lng={106.9227696}
                                             text="Candidate Address"
                                         />
-                                    </GoogleMapReact> */}
+                                    </GoogleMapReact>
                                 </div>
                             </div>
                             <div className="container mt-3">
@@ -138,7 +111,7 @@ export default function CandidateDetail() {
                                         <button
                                             className="btn-green w-full"
                                             onClick={() =>
-                                                processCandidate(candidateDetails[0], 'accept')
+                                                dispatch(acceptCandidate(candidateDetails[0]))
                                             }
                                         >
                                             Accept Candidate
@@ -148,7 +121,7 @@ export default function CandidateDetail() {
                                         <button
                                             className="btn-red w-full"
                                             onClick={() =>
-                                                processCandidate(candidateDetails[0], 'decline')
+                                                dispatch(declineCandidate(candidateDetails[0]))
                                             }
                                         >
                                             Decline Candidate
@@ -157,7 +130,7 @@ export default function CandidateDetail() {
                                 </div>
                                 <button
                                     className="btn-black w-full mt-3"
-                                    onClick={() => saveCandidate(candidateDetails[0])}
+                                    onClick={() => dispatch(saveCandidate(candidateDetails[0]))}
                                 >
                                     Save this candidate
                                 </button>

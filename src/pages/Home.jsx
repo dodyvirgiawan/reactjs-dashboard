@@ -2,45 +2,22 @@ import { useEffect } from 'react'
 import { useHistory } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCandidates, addAcceptedCandidates, addDeclinedCandidates } from '../store/action'
+import { fetchCandidates, acceptCandidate, declineCandidate } from '../store/action'
 
 import ReactLoading from 'react-loading'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
 import Graph from '../components/Graph'
 
-import { toast } from 'react-toastify'
-
 export default function Home() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const { loadingCandidates, candidates, acceptedCandidates, declinedCandidates } = useSelector(
-        (state) => state
-    )
+    const { loadingCandidates, candidates } = useSelector((state) => state)
 
     useEffect(() => {
         dispatch(fetchCandidates())
     }, [dispatch])
-
-    function isCandidateAlreadyProcessed(candidate) {
-        const foundInAccepted = acceptedCandidates.find((el) => el.id === candidate.id)
-        const foundInDeclined = declinedCandidates.find((el) => el.id === candidate.id)
-
-        return foundInAccepted || foundInDeclined ? true : false
-    }
-
-    function processCandidate(candidate, type) {
-        if (isCandidateAlreadyProcessed(candidate)) {
-            toast.error(`${candidate.name} is already processed!`)
-        } else {
-            type === 'accept'
-                ? dispatch(addAcceptedCandidates(candidate))
-                : dispatch(addDeclinedCandidates(candidate))
-
-            toast.success(`${candidate.name} successfully processed! (${type})`)
-        }
-    }
 
     return (
         <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
@@ -98,7 +75,7 @@ export default function Home() {
                                                 <button
                                                     className="btn-green"
                                                     onClick={() =>
-                                                        processCandidate(candidate, 'accept')
+                                                        dispatch(acceptCandidate(candidate))
                                                     }
                                                 >
                                                     Accept
@@ -106,7 +83,7 @@ export default function Home() {
                                                 <button
                                                     className="btn-red"
                                                     onClick={() =>
-                                                        processCandidate(candidate, 'decline')
+                                                        dispatch(declineCandidate(candidate))
                                                     }
                                                 >
                                                     Decline
