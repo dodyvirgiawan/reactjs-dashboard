@@ -3,6 +3,9 @@ import {
     SET_LOADING_CANDIDATES,
     SET_CANDIDATE_DETAILS,
     SET_LOADING_CANDIDATE_DETAILS,
+    ADD_ACCEPTED_CANDIDATES,
+    ADD_DECLINED_CANDIDATES,
+    ADD_SAVED_CANDIDATES,
 } from './actionType'
 
 import candidateApi from '../apis/candidateApi'
@@ -31,6 +34,27 @@ function setCandidateDetails(payload) {
 function setLoadingCandidateDetails(payload) {
     return {
         type: SET_LOADING_CANDIDATE_DETAILS,
+        payload,
+    }
+}
+
+export function addSavedCandidates(payload) {
+    return {
+        type: ADD_SAVED_CANDIDATES,
+        payload,
+    }
+}
+
+export function addAcceptedCandidates(payload) {
+    return {
+        type: ADD_ACCEPTED_CANDIDATES,
+        payload,
+    }
+}
+
+export function addDeclinedCandidates(payload) {
+    return {
+        type: ADD_DECLINED_CANDIDATES,
         payload,
     }
 }

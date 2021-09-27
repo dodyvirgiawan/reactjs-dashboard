@@ -2,21 +2,45 @@ import { useEffect } from 'react'
 import { useHistory } from 'react-router'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCandidates } from '../store/action'
+import { fetchCandidates, addAcceptedCandidates, addDeclinedCandidates } from '../store/action'
 
 import ReactLoading from 'react-loading'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
+import Graph from '../components/Graph'
+
+import { toast } from 'react-toastify'
 
 export default function Home() {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const { loadingCandidates, candidates } = useSelector((state) => state)
+    const { loadingCandidates, candidates, acceptedCandidates, declinedCandidates } = useSelector(
+        (state) => state
+    )
 
     useEffect(() => {
         dispatch(fetchCandidates())
     }, [dispatch])
+
+    function isCandidateAlreadyProcessed(candidate) {
+        const foundInAccepted = acceptedCandidates.find((el) => el.id === candidate.id)
+        const foundInDeclined = declinedCandidates.find((el) => el.id === candidate.id)
+
+        return foundInAccepted || foundInDeclined ? true : false
+    }
+
+    function processCandidate(candidate, type) {
+        if (isCandidateAlreadyProcessed(candidate)) {
+            toast.error(`${candidate.name} is already processed!`)
+        } else {
+            type === 'accept'
+                ? dispatch(addAcceptedCandidates(candidate))
+                : dispatch(addDeclinedCandidates(candidate))
+
+            toast.success(`${candidate.name} successfully processed! (${type})`)
+        }
+    }
 
     return (
         <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
@@ -25,7 +49,7 @@ export default function Home() {
             <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 <HeaderTitle title={'Statistics'} />
 
-                <div className="container">Disini isi graph</div>
+                <Graph />
 
                 <HeaderTitle title={'Candidate List'} />
 
@@ -71,8 +95,22 @@ export default function Home() {
                                                 </button>
                                             </td>
                                             <td>
-                                                <button className="btn-green">Accept</button>
-                                                <button className="btn-red">Decline</button>
+                                                <button
+                                                    className="btn-green"
+                                                    onClick={() =>
+                                                        processCandidate(candidate, 'accept')
+                                                    }
+                                                >
+                                                    Accept
+                                                </button>
+                                                <button
+                                                    className="btn-red"
+                                                    onClick={() =>
+                                                        processCandidate(candidate, 'decline')
+                                                    }
+                                                >
+                                                    Decline
+                                                </button>
                                             </td>
                                         </tr>
                                     )
