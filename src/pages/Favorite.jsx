@@ -6,7 +6,7 @@ import CandidateCard from '../components/CandidateCard'
 import HeaderTitle from '../components/HeaderTitle'
 
 export default function Favorite() {
-    const { savedCandidates } = useSelector((state) => state)
+    const { savedCandidates } = useSelector((state) => state.candidate)
 
     return (
         <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
@@ -16,9 +16,19 @@ export default function Favorite() {
                 <HeaderTitle title={'Saved Candidates'} />
 
                 <div className="container flex flex-row flex-wrap mt-3">
-                    {savedCandidates.map((candidate, idx) => {
-                        return <CandidateCard key={'candidate' + idx} candidate={candidate} />
-                    })}
+                    {savedCandidates.length === 0 ? (
+                        <div>
+                            <p className="text-gray-500 text-sm"> Saved Candidates list is empty</p>
+                        </div>
+                    ) : (
+                        <>
+                            {savedCandidates.map((candidate, idx) => {
+                                return (
+                                    <CandidateCard key={'candidate' + idx} candidate={candidate} />
+                                )
+                            })}
+                        </>
+                    )}
                 </div>
             </div>
         </div>

@@ -2,8 +2,8 @@ import { Line } from 'react-chartjs-2'
 
 import { useSelector } from 'react-redux'
 
-export default function Graph() {
-    const { acceptedCandidates, declinedCandidates } = useSelector((state) => state)
+export default function CandidateGraph() {
+    const { acceptedCandidates, declinedCandidates } = useSelector((state) => state.candidate)
 
     const data = {
         labels: [

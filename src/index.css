@@ -52,3 +52,29 @@ body {
 .sidebar-btn:hover {
     @apply bg-gray-300;
 }
+
+.paginationContainer {
+    @apply mt-10;
+    @apply mb-10;
+    @apply flex;
+    @apply justify-end;
+}
+
+.paginationContainer a {
+    transition: all 0.2s ease-in-out;
+    @apply m-1;
+    @apply p-2;
+    @apply border-gray-500;
+    @apply border-2;
+    @apply rounded-md;
+}
+
+.paginationContainer a:hover {
+    @apply bg-black;
+    @apply text-white;
+}
+
+.paginationActive a {
+    @apply bg-black;
+    @apply text-white;
+}

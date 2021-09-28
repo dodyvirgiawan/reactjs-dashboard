@@ -8,8 +8,8 @@ import {
     ADD_SAVED_CANDIDATES,
 } from './actionType'
 
-import candidateApi from '../apis/candidateApi'
-import isCandidateAlreadyProcessed from '../helpers/isCandidateAlreadyProcessed'
+import jsonplaceholderApi from '../../apis/jsonplaceholderApi'
+import isCandidateAlreadyProcessed from '../../helpers/isCandidateAlreadyProcessed'
 
 import { toast } from 'react-toastify'
 
@@ -62,12 +62,12 @@ function addDeclinedCandidates(payload) {
     }
 }
 
-export function fetchCandidates(payload) {
-    return async function (dispatch, getState) {
+export function fetchCandidates() {
+    return async function (dispatch) {
         try {
             dispatch(setLoadingCandidates(true))
 
-            let response = await candidateApi({
+            let response = await jsonplaceholderApi({
                 method: 'GET',
                 url: '/users',
             })
@@ -82,11 +82,12 @@ export function fetchCandidates(payload) {
 }
 
 export function fetchCandidateById(id) {
-    return async function (dispatch, getState) {
+    //! Ganti ke URLSearchParams?
+    return async function (dispatch) {
         try {
             dispatch(setLoadingCandidateDetails(true))
 
-            let response = await candidateApi({
+            let response = await jsonplaceholderApi({
                 method: 'GET',
                 url: `/users?id=${id}`,
             })
@@ -100,54 +101,54 @@ export function fetchCandidateById(id) {
     }
 }
 
-export function saveCandidate(candidate) {
+export function saveCandidate(payload) {
     return function (dispatch, getState) {
-        const { savedCandidates } = getState()
-        const foundSavedCandidates = savedCandidates.find((el) => el.id === candidate.id)
+        const { candidate } = getState()
+        const foundSavedCandidates = candidate.savedCandidates.find((el) => el.id === payload.id)
 
         if (foundSavedCandidates) {
-            toast.error(`${candidate.name} is already saved!`)
+            toast.error(`${payload.name} is already saved!`)
         } else {
-            dispatch(addSavedCandidates(candidate))
-            toast.success(`${candidate.name} successfully saved!`)
+            dispatch(addSavedCandidates(payload))
+            toast.success(`${payload.name} successfully saved!`)
         }
     }
 }
 
-export function acceptCandidate(candidate) {
+export function acceptCandidate(payload) {
     return function (dispatch, getState) {
-        const { acceptedCandidates, declinedCandidates } = getState()
+        const { candidate } = getState()
 
         const isAlreadyProcessed = isCandidateAlreadyProcessed(
-            candidate,
-            acceptedCandidates,
-            declinedCandidates
+            payload,
+            candidate.acceptedCandidates,
+            candidate.declinedCandidates
         )
 
         if (isAlreadyProcessed) {
-            toast.error(`${candidate.name} is already proccessed!`)
+            toast.error(`${payload.name} is already processed!`)
         } else {
-            dispatch(addAcceptedCandidates(candidate))
-            toast.success(`${candidate.name} successfully accepted!`)
+            dispatch(addAcceptedCandidates(payload))
+            toast.success(`${payload.name} successfully accepted!`)
         }
     }
 }
 
-export function declineCandidate(candidate) {
+export function declineCandidate(payload) {
     return function (dispatch, getState) {
-        const { acceptedCandidates, declinedCandidates } = getState()
+        const { candidate } = getState()
 
         const isAlreadyProcessed = isCandidateAlreadyProcessed(
-            candidate,
-            acceptedCandidates,
-            declinedCandidates
+            payload,
+            candidate.acceptedCandidates,
+            candidate.declinedCandidates
         )
 
         if (isAlreadyProcessed) {
-            toast.error(`${candidate.name} is already proccessed!`)
+            toast.error(`${payload.name} is already processed!`)
         } else {
-            dispatch(addDeclinedCandidates(candidate))
-            toast.success(`${candidate.name} successfully declined!`)
+            dispatch(addDeclinedCandidates(payload))
+            toast.success(`${payload.name} successfully declined!`)
         }
     }
 }
