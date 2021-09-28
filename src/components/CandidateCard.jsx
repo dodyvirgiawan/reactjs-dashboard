@@ -1,5 +1,7 @@
+// ~~~~~~~~~~~~~~~~~~ Routers ~~~~~~~~~~~~~~~~~~
 import { Link } from 'react-router-dom'
 
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import { BsFillPersonFill } from 'react-icons/bs'
 
 export default function CandidateCard({ candidate }) {

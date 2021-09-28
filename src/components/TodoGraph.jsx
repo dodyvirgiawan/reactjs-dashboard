@@ -1,8 +1,11 @@
+// ~~~~~~~~~~~~~~~~~~ React ~~~~~~~~~~~~~~~~~~
 import { useState, useEffect } from 'react'
 
-import { Doughnut } from 'react-chartjs-2'
-
+// ~~~~~~~~~~~~~~~~~~ Redux ~~~~~~~~~~~~~~~~~~
 import { useSelector } from 'react-redux'
+
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
+import { Doughnut } from 'react-chartjs-2'
 
 export default function TodoGraph() {
     const { todos } = useSelector((state) => state.todo)
