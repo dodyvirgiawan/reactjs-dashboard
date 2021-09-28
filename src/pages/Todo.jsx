@@ -16,8 +16,8 @@ export default function Todo() {
 
     const { todos, loadingTodos } = useSelector((state) => state.todo)
 
-    const [pageNumber, setPageNumber] = useState(0)
-    const [perPage, setPerPage] = useState(10)
+    const [pageNumber, setPageNumber] = useState(0) // eslint-disable-next-line
+    const [perPage, setPerPage] = useState(10) // eslint-disable-next-line
     const [totalTodosData, setTotalTodosData] = useState(200) //* Source: JSONPlaceholder API
     const [totalPages, setTotalPages] = useState(0)
 
