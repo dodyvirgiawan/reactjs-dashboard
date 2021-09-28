@@ -9,8 +9,8 @@ import SidebarButton from './SidebarButton'
 
 export default function Sidebar() {
     return (
-        <div className="md:w-1/6 bg-gray-200 rounded-tl-lg rounded-bl-lg p-5">
-            <h1 className="text-lg font-semibold mt-5 text-gray-800">Candidate Dashboard</h1>
+        <div className="md:w-1/6 bg-gray-700 md:rounded-tl-lg md:rounded-bl-lg p-5">
+            <h1 className="text-lg font-semibold mt-5 text-white">Candidate Dashboard</h1>
             <hr className="border-1 border-black opacity-20 mt-5"></hr>
 
             <div className="container mt-5 p-2">

@@ -40,7 +40,7 @@ button:focus {
 }
 
 .btn-black {
-    @apply bg-black;
+    @apply bg-gray-800;
     @apply text-white;
     @apply rounded-xl;
     @apply p-2;
@@ -50,14 +50,14 @@ button:focus {
 .sidebar-btn {
     transition: all 0.2s ease-in-out;
     @apply cursor-pointer;
-    @apply bg-gray-200;
+    @apply bg-gray-700;
     @apply p-3;
     @apply rounded-lg;
     @apply mt-3;
 }
 
 .sidebar-btn:hover {
-    @apply bg-gray-300;
+    @apply bg-gray-500;
 }
 
 .paginationContainer {
@@ -65,6 +65,7 @@ button:focus {
     @apply mb-10;
     @apply flex;
     @apply justify-end;
+    @apply text-gray-400;
 }
 
 .paginationContainer a {
@@ -72,17 +73,17 @@ button:focus {
     @apply md:m-1;
     @apply md:p-2;
     @apply p-1;
-    @apply border-gray-500;
+    @apply border-gray-200;
     @apply border-2;
     @apply rounded-md;
 }
 
 .paginationContainer a:hover {
-    @apply bg-black;
+    @apply bg-gray-700;
     @apply text-white;
 }
 
 .paginationActive a {
-    @apply bg-black;
+    @apply bg-gray-700;
     @apply text-white;
 }

@@ -14,8 +14,9 @@ import {
 // ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import HeaderTitle from '../components/HeaderTitle'
 import MapMarker from '../components/MapMarker'
-import ReactLoading from 'react-loading'
+import Loading from '../components/Loading'
 import Sidebar from '../components/Sidebar'
+import Footer from '../components/Footer'
 
 // ~~~~~~~~~~~~~~~~~~ Google Maps ~~~~~~~~~~~~~~~~~~
 import GoogleMapReact from 'google-map-react'
@@ -40,13 +41,7 @@ export default function CandidateDetail() {
 
             <div className="md:w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 {loadingCandidateDetails ? (
-                    <ReactLoading
-                        type={'spinningBubbles'}
-                        color={'black'}
-                        height={90}
-                        width={90}
-                        className="mx-auto mt-32"
-                    />
+                    <Loading />
                 ) : (
                     <>
                         <HeaderTitle title={'Candidate Details'} />
@@ -144,6 +139,7 @@ export default function CandidateDetail() {
                         </div>
                     </>
                 )}
+                <Footer />
             </div>
         </div>
     )

@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchCandidates, acceptCandidate, declineCandidate } from '../store/candidates/action'
 
 // ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
-import ReactLoading from 'react-loading'
+import Loading from '../components/Loading'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
 import CandidateGraph from '../components/CandidateGraph'
+import Footer from '../components/Footer'
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -26,7 +27,7 @@ export default function Home() {
         <div className="container mx-auto md:flex md:flex-row shadow-2xl rounded-lg">
             <Sidebar />
 
-            <div className="md:w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
+            <div className="md:w-5/6 rounded-t-lg rounded-b-lg p-5 h-screen overflow-auto">
                 <HeaderTitle title={'Statistics'} />
 
                 <CandidateGraph />
@@ -35,15 +36,9 @@ export default function Home() {
 
                 <div className="container">
                     {loadingCandidates ? (
-                        <ReactLoading
-                            type={'spinningBubbles'}
-                            color={'black'}
-                            height={90}
-                            width={90}
-                            className="mx-auto mt-32"
-                        />
+                        <Loading />
                     ) : (
-                        <div className="bg-gray-100 p-3 rounded-xl mt-5 mb-12 container overflow-auto">
+                        <div className="bg-gray-100 p-3 rounded-xl mt-5 mb-12 container overflow-auto shadow-2xl">
                             <table className="w-full mt-5 text-center">
                                 <thead className="text-gray-700">
                                     <tr>
@@ -59,7 +54,7 @@ export default function Home() {
                                 <tbody className="text-sm text-gray-600">
                                     {candidates.map((candidate, idx) => {
                                         return (
-                                            <tr className="mt-3" key={'candidate' + idx}>
+                                            <tr className="mt-3 border-b-2" key={'candidate' + idx}>
                                                 <td>{idx + 1}.</td>
                                                 <td>{candidate.name}</td>
                                                 <td>{candidate.address.city}</td>
@@ -104,6 +99,8 @@ export default function Home() {
                         </div>
                     )}
                 </div>
+
+                <Footer />
             </div>
         </div>
     )
