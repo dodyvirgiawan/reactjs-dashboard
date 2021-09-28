@@ -74,27 +74,26 @@ export function fetchCandidates() {
 
             dispatch(setCandidates(response.data))
         } catch (err) {
-            console.log(err)
+            toast.error('Sorry, an error has occured while fetching candidates!')
         } finally {
             dispatch(setLoadingCandidates(false))
         }
     }
 }
 
-export function fetchCandidateById(id) {
-    //! Ganti ke URLSearchParams?
+export function fetchCandidateById(queryParams) {
     return async function (dispatch) {
         try {
             dispatch(setLoadingCandidateDetails(true))
 
             let response = await jsonplaceholderApi({
                 method: 'GET',
-                url: `/users?id=${id}`,
+                url: `/users?${queryParams}`,
             })
 
             dispatch(setCandidateDetails(response.data))
         } catch (err) {
-            console.log(err)
+            toast.error('Sorry, an error has occured while fetching candidate details!')
         } finally {
             dispatch(setLoadingCandidateDetails(false))
         }

@@ -25,7 +25,9 @@ export default function CandidateDetail() {
     const { candidateDetails, loadingCandidateDetails } = useSelector((state) => state.candidate)
 
     useEffect(() => {
-        dispatch(fetchCandidateById(id))
+        const URLParams = new URLSearchParams({ id })
+
+        dispatch(fetchCandidateById(URLParams.toString()))
     }, [dispatch, id])
 
     return (

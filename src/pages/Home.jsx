@@ -40,7 +40,7 @@ export default function Home() {
                             className="mx-auto mt-32"
                         />
                     ) : (
-                        <div className="bg-gray-100 p-3 rounded-xl mt-5">
+                        <div className="bg-gray-100 p-3 rounded-xl mt-5 mb-12">
                             <table className="w-full mt-5 text-center">
                                 <thead className="text-gray-700">
                                     <tr>
