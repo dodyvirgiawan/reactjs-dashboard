@@ -106,7 +106,7 @@ export default function CandidateDetail() {
                                         <MapMarker
                                             lat={-6.2358453} //* Notes: JSONPlaceholder return invalid lat and longitude
                                             lng={106.9227696} //* Notes: JSONPlaceholder return invalid lat and longitude
-                                            text="Candidate Address"
+                                            text="Candidate Location"
                                         />
                                     </GoogleMapReact>
                                 </div>

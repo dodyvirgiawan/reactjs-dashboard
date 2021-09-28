@@ -73,6 +73,7 @@ export default function Home() {
                                                                 `/candidates/${candidate.id}`
                                                             )
                                                         }
+                                                        data-testid="detailButton"
                                                     >
                                                         Details
                                                     </button>

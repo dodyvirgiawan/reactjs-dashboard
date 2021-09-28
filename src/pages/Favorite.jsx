@@ -19,7 +19,10 @@ export default function Favorite() {
                 <div className="container md:flex md:flex-row md:flex-wrap mt-3">
                     {savedCandidates.length === 0 ? (
                         <div>
-                            <p className="text-gray-500 text-sm"> Saved Candidates list is empty</p>
+                            <p className="text-gray-500 text-sm" data-testid="emptySavedCandidate">
+                                {' '}
+                                Saved Candidates list is empty
+                            </p>
                         </div>
                     ) : (
                         <>
