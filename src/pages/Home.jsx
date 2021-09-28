@@ -20,10 +20,10 @@ export default function Home() {
     }, [dispatch])
 
     return (
-        <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
+        <div className="container mx-auto md:flex md:flex-row shadow-2xl rounded-lg">
             <Sidebar />
 
-            <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
+            <div className="md:w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 <HeaderTitle title={'Statistics'} />
 
                 <CandidateGraph />
@@ -40,7 +40,7 @@ export default function Home() {
                             className="mx-auto mt-32"
                         />
                     ) : (
-                        <div className="bg-gray-100 p-3 rounded-xl mt-5 mb-12">
+                        <div className="bg-gray-100 p-3 rounded-xl mt-5 mb-12 container overflow-auto">
                             <table className="w-full mt-5 text-center">
                                 <thead className="text-gray-700">
                                     <tr>

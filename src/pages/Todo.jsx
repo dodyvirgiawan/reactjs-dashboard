@@ -40,10 +40,10 @@ export default function Todo() {
     }, [todos, perPage, totalTodosData])
 
     return (
-        <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
+        <div className="container mx-auto md:flex md:flex-row shadow-2xl rounded-lg">
             <Sidebar />
 
-            <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
+            <div className="md:w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 <HeaderTitle title={'Statistics'} />
 
                 <TodoGraph />
@@ -60,7 +60,7 @@ export default function Todo() {
                             className="mx-auto mt-32 mb-32"
                         />
                     ) : (
-                        <>
+                        <div className="container">
                             <input
                                 type="text"
                                 className="mt-5 p-3 mx-auto rounded-full border-0 bg-gray-100"
@@ -70,7 +70,7 @@ export default function Todo() {
                                 }}
                             ></input>
 
-                            <div className="bg-gray-100 p-3 rounded-xl mt-5">
+                            <div className="bg-gray-100 p-3 rounded-xl mt-5 container overflow-auto">
                                 <table className="w-full mt-5 text-center">
                                     <thead className="text-gray-700">
                                         <tr>
@@ -128,7 +128,7 @@ export default function Todo() {
                                     </tbody>
                                 </table>
                             </div>
-                        </>
+                        </div>
                     )}
 
                     <ReactPaginate

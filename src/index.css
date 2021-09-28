@@ -69,8 +69,9 @@ button:focus {
 
 .paginationContainer a {
     transition: all 0.2s ease-in-out;
-    @apply m-1;
-    @apply p-2;
+    @apply md:m-1;
+    @apply md:p-2;
+    @apply p-1;
     @apply border-gray-500;
     @apply border-2;
     @apply rounded-md;
