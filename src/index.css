@@ -76,6 +76,7 @@ button:focus {
     @apply border-gray-200;
     @apply border-2;
     @apply rounded-md;
+    @apply cursor-pointer;
 }
 
 .paginationContainer a:hover {
