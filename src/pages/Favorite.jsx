@@ -1,8 +1,9 @@
+// ~~~~~~~~~~~~~~~~~~ Redux ~~~~~~~~~~~~~~~~~~
 import { useSelector } from 'react-redux'
 
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import Sidebar from '../components/Sidebar'
 import CandidateCard from '../components/CandidateCard'
-
 import HeaderTitle from '../components/HeaderTitle'
 
 export default function Favorite() {

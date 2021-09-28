@@ -9,6 +9,7 @@ import {
 } from './actionType'
 
 import jsonplaceholderApi from '../../apis/jsonplaceholderApi'
+
 import isCandidateAlreadyProcessed from '../../helpers/isCandidateAlreadyProcessed'
 
 import { toast } from 'react-toastify'

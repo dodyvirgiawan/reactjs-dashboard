@@ -1,15 +1,20 @@
+// ~~~~~~~~~~~~~~~~~~ React ~~~~~~~~~~~~~~~~~~
+import { useState, useEffect } from 'react'
+
+// ~~~~~~~~~~~~~~~~~~ Redux ~~~~~~~~~~~~~~~~~~
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchTodos } from '../store/todos/action'
+
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
 import TodoGraph from '../components/TodoGraph'
 import ReactLoading from 'react-loading'
 import ReactPaginate from 'react-paginate'
 
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+// ~~~~~~~~~~~~~~~~~~ Hooks & Helpers ~~~~~~~~~~~~~~~~~~
 import useDebounce from '../hooks/useDebounce'
 import debounce from '../helpers/debounce'
-
-import { fetchTodos } from '../store/todos/action'
 
 export default function Todo() {
     const dispatch = useDispatch()

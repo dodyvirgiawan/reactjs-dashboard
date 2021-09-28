@@ -1,9 +1,12 @@
+// ~~~~~~~~~~~~~~~~~~ React ~~~~~~~~~~~~~~~~~~
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
 
+// ~~~~~~~~~~~~~~~~~~ Redux ~~~~~~~~~~~~~~~~~~
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCandidates, acceptCandidate, declineCandidate } from '../store/candidates/action'
 
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import ReactLoading from 'react-loading'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'

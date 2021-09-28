@@ -1,9 +1,9 @@
-import Sidebar from '../components/Sidebar'
-
+// ~~~~~~~~~~~~~~~~~~ React ~~~~~~~~~~~~~~~~~~
 import { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
 
+// ~~~~~~~~~~~~~~~~~~ Redux ~~~~~~~~~~~~~~~~~~
+import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchCandidateById,
     acceptCandidate,
@@ -11,11 +11,15 @@ import {
     saveCandidate,
 } from '../store/candidates/action'
 
+// ~~~~~~~~~~~~~~~~~~ Components ~~~~~~~~~~~~~~~~~~
 import HeaderTitle from '../components/HeaderTitle'
 import MapMarker from '../components/MapMarker'
 import ReactLoading from 'react-loading'
+import Sidebar from '../components/Sidebar'
 
+// ~~~~~~~~~~~~~~~~~~ Google Maps ~~~~~~~~~~~~~~~~~~
 import GoogleMapReact from 'google-map-react'
+
 const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 export default function CandidateDetail() {
@@ -94,14 +98,14 @@ export default function CandidateDetail() {
                                             key: GOOGLE_MAPS_API_KEY,
                                         }}
                                         defaultCenter={{
-                                            lat: -6.2358453,
-                                            lng: 106.9227696,
+                                            lat: -6.2358453, //* Notes: JSONPlaceholder return invalid lat and longitude
+                                            lng: 106.9227696, //* Notes: JSONPlaceholder return invalid lat and longitude
                                         }}
                                         defaultZoom={15}
                                     >
                                         <MapMarker
-                                            lat={-6.2358453}
-                                            lng={106.9227696}
+                                            lat={-6.2358453} //* Notes: JSONPlaceholder return invalid lat and longitude
+                                            lng={106.9227696} //* Notes: JSONPlaceholder return invalid lat and longitude
                                             text="Candidate Address"
                                         />
                                     </GoogleMapReact>
