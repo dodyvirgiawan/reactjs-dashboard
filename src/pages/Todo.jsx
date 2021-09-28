@@ -6,6 +6,8 @@ import ReactPaginate from 'react-paginate'
 
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import useDebounce from '../hooks/useDebounce'
+import debounce from '../helpers/debounce'
 
 import { fetchTodos } from '../store/todos/action'
 
@@ -18,6 +20,11 @@ export default function Todo() {
     const [perPage, setPerPage] = useState(10)
     const [totalTodosData, setTotalTodosData] = useState(200) //* Source: JSONPlaceholder API
     const [totalPages, setTotalPages] = useState(0)
+
+    const [searchedTodos, isSearchingTodos, setIsSearchingTodos, searchTodoFunction] =
+        useDebounce(todos)
+
+    const searchTodo = debounce(searchTodoFunction)
 
     useEffect(() => {
         const URLParams = new URLSearchParams({
@@ -53,38 +60,75 @@ export default function Todo() {
                             className="mx-auto mt-32 mb-32"
                         />
                     ) : (
-                        <div className="bg-gray-100 p-3 rounded-xl mt-5">
-                            <table className="w-full mt-5 text-center">
-                                <thead className="text-gray-700">
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Title</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {todos.map((eachTodo, idx) => {
-                                        return (
-                                            <tr className="mt-3" key={'todo' + idx}>
-                                                <td>{eachTodo.id}.</td>
-                                                <td>{eachTodo.title}</td>
-                                                <td>
-                                                    {eachTodo.completed ? (
-                                                        <p className="btn-green cursor-pointer">
-                                                            Completed
-                                                        </p>
-                                                    ) : (
-                                                        <p className="btn-red cursor-pointer">
-                                                            Incomplete
-                                                        </p>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
+                        <>
+                            <input
+                                type="text"
+                                className="mt-5 p-3 mx-auto rounded-full border-0 bg-gray-100"
+                                placeholder="search todo by title..."
+                                onChange={(e) => {
+                                    searchTodo(e)
+                                }}
+                            ></input>
+
+                            <div className="bg-gray-100 p-3 rounded-xl mt-5">
+                                <table className="w-full mt-5 text-center">
+                                    <thead className="text-gray-700">
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Title</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {isSearchingTodos ? (
+                                            <>
+                                                {searchedTodos.map((eachTodo, idx) => {
+                                                    return (
+                                                        <tr className="mt-3" key={'todo' + idx}>
+                                                            <td>{eachTodo.id}.</td>
+                                                            <td>{eachTodo.title}</td>
+                                                            <td>
+                                                                {eachTodo.completed ? (
+                                                                    <p className="btn-green cursor-pointer">
+                                                                        Completed
+                                                                    </p>
+                                                                ) : (
+                                                                    <p className="btn-red cursor-pointer">
+                                                                        Incomplete
+                                                                    </p>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })}
+                                            </>
+                                        ) : (
+                                            <>
+                                                {todos.map((eachTodo, idx) => {
+                                                    return (
+                                                        <tr className="mt-3" key={'todo' + idx}>
+                                                            <td>{eachTodo.id}.</td>
+                                                            <td>{eachTodo.title}</td>
+                                                            <td>
+                                                                {eachTodo.completed ? (
+                                                                    <p className="btn-green cursor-pointer">
+                                                                        Completed
+                                                                    </p>
+                                                                ) : (
+                                                                    <p className="btn-red cursor-pointer">
+                                                                        Incomplete
+                                                                    </p>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })}
+                                            </>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </>
                     )}
 
                     <ReactPaginate
@@ -92,7 +136,10 @@ export default function Todo() {
                         nextLabel={'Next'}
                         forcePage={pageNumber}
                         pageCount={totalPages}
-                        onPageChange={({ selected }) => setPageNumber(selected)}
+                        onPageChange={({ selected }) => {
+                            setPageNumber(selected)
+                            setIsSearchingTodos(false)
+                        }}
                         containerClassName={'paginationContainer'}
                         activeClassName={'paginationActive'}
                     />
