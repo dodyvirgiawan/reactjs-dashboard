@@ -2,6 +2,8 @@ import { SET_TODOS, SET_LOADING_TODOS } from './actionType'
 
 import jsonplaceholderApi from '../../apis/jsonplaceholderApi'
 
+import { toast } from 'react-toastify'
+
 function setTodos(payload) {
     return {
         type: SET_TODOS,
@@ -26,11 +28,9 @@ export function fetchTodos(queryParams) {
                 url: `/todos?${queryParams}`,
             })
 
-            console.log(`/todos?${queryParams}`, '<<<<')
-
             dispatch(setTodos(response.data))
         } catch (err) {
-            console.log(err)
+            toast.error('Sorry, an error has occured while fetching todos!')
         } finally {
             dispatch(setLoadingTodos(false))
         }

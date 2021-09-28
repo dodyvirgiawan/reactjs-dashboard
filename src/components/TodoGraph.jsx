@@ -10,17 +10,13 @@ export default function TodoGraph() {
     const [totalCompletedTodo, setTotalCompletedTodo] = useState(0)
     const [totalIncompleteTodo, setTotalIncompleteTodo] = useState(0)
 
-    function getTodoStatistics() {
+    useEffect(() => {
         const completedTodo = todos.filter((todo) => todo.completed)
         const incompleteTodo = todos.filter((todo) => !todo.completed)
 
         setTotalCompletedTodo(completedTodo.length)
         setTotalIncompleteTodo(incompleteTodo.length)
-    }
-
-    useEffect(() => {
-        getTodoStatistics()
-    }, [getTodoStatistics])
+    }, [todos])
 
     const data = {
         labels: ['Completed', 'Incomplete'],
