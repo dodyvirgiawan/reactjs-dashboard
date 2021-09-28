@@ -9,8 +9,9 @@ import { fetchTodos } from '../store/todos/action'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
 import TodoGraph from '../components/TodoGraph'
-import ReactLoading from 'react-loading'
+import Loading from '../components/Loading'
 import ReactPaginate from 'react-paginate'
+import Footer from '../components/Footer'
 
 // ~~~~~~~~~~~~~~~~~~ Hooks & Helpers ~~~~~~~~~~~~~~~~~~
 import useDebounce from '../hooks/useDebounce'
@@ -57,13 +58,7 @@ export default function Todo() {
 
                 <div className="container">
                     {loadingTodos ? (
-                        <ReactLoading
-                            type={'spinningBubbles'}
-                            color={'black'}
-                            height={90}
-                            width={90}
-                            className="mx-auto mt-32 mb-32"
-                        />
+                        <Loading />
                     ) : (
                         <div className="container">
                             <input
@@ -75,7 +70,7 @@ export default function Todo() {
                                 }}
                             ></input>
 
-                            <div className="bg-gray-100 p-3 rounded-xl mt-5 container overflow-auto">
+                            <div className="bg-gray-100 p-3 rounded-xl mt-5 container overflow-auto shadow-2xl">
                                 <table className="w-full mt-5 text-center">
                                     <thead className="text-gray-700">
                                         <tr>
@@ -84,7 +79,7 @@ export default function Todo() {
                                             <th>Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className="text-sm text-gray-600">
                                         {isSearchingTodos ? (
                                             <>
                                                 {searchedTodos.map((eachTodo, idx) => {
@@ -149,6 +144,8 @@ export default function Todo() {
                         activeClassName={'paginationActive'}
                     />
                 </div>
+
+                <Footer />
             </div>
         </div>
     )
