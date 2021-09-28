@@ -49,7 +49,7 @@ export default function CandidateGraph() {
 
     return (
         <div className="container">
-            <Line data={data} options={options} width={100} height={20} />
+            <Line data={data} options={options} width={100} height={40} />
         </div>
     )
 }

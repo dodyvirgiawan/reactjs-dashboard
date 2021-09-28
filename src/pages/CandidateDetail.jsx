@@ -31,10 +31,10 @@ export default function CandidateDetail() {
     }, [dispatch, id])
 
     return (
-        <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
+        <div className="container mx-auto md:flex md:flex-row shadow-2xl rounded-lg">
             <Sidebar />
 
-            <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
+            <div className="md:w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 {loadingCandidateDetails ? (
                     <ReactLoading
                         type={'spinningBubbles'}
@@ -108,8 +108,8 @@ export default function CandidateDetail() {
                                 </div>
                             </div>
                             <div className="container mt-3">
-                                <div className="container flex flex-row">
-                                    <div className="container w-1/2 mt-3">
+                                <div className="container md:flex md:flex-row">
+                                    <div className="container md:w-1/2 mt-3">
                                         <button
                                             className="btn-green w-full"
                                             onClick={() =>
@@ -119,7 +119,7 @@ export default function CandidateDetail() {
                                             Accept Candidate
                                         </button>
                                     </div>
-                                    <div className="container w-1/2 mt-3">
+                                    <div className="container md:w-1/2 mt-3">
                                         <button
                                             className="btn-red w-full"
                                             onClick={() =>
