@@ -9,7 +9,7 @@ import {
     acceptCandidate,
     declineCandidate,
     saveCandidate,
-} from '../store/action'
+} from '../store/candidates/action'
 
 import HeaderTitle from '../components/HeaderTitle'
 import MapMarker from '../components/MapMarker'
@@ -22,7 +22,7 @@ export default function CandidateDetail() {
     const dispatch = useDispatch()
     const { id } = useParams()
 
-    const { candidateDetails, loadingCandidateDetails } = useSelector((state) => state)
+    const { candidateDetails, loadingCandidateDetails } = useSelector((state) => state.candidate)
 
     useEffect(() => {
         dispatch(fetchCandidateById(id))

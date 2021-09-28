@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { MdDashboard } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
+import { RiCalendarTodoFill } from 'react-icons/ri'
 
 import SidebarButton from './SidebarButton'
 
@@ -17,6 +18,9 @@ export default function Sidebar() {
                 </Link>
                 <Link to="/favorites">
                     <SidebarButton logo={CgProfile} text={'Saved Candidates'} />
+                </Link>
+                <Link to="/todos">
+                    <SidebarButton logo={RiCalendarTodoFill} text={'Todos'} />
                 </Link>
             </div>
         </div>

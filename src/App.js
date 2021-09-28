@@ -6,6 +6,7 @@ import store from './store'
 import Home from './pages/Home'
 import CandidateDetail from './pages/CandidateDetail'
 import Favorite from './pages/Favorite'
+import Todo from './pages/Todo'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -25,6 +26,9 @@ export default function App() {
                     </Route>
                     <Route path="/favorites">
                         <Favorite />
+                    </Route>
+                    <Route path="/todos">
+                        <Todo />
                     </Route>
                 </Switch>
             </Provider>
