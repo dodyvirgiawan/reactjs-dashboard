@@ -1,5 +1,6 @@
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
+import TodoGraph from '../components/TodoGraph'
 import ReactLoading from 'react-loading'
 import ReactPaginate from 'react-paginate'
 
@@ -11,7 +12,7 @@ import { fetchTodos } from '../store/todos/action'
 export default function Todo() {
     const dispatch = useDispatch()
 
-    const { todo } = useSelector((state) => state)
+    const { todos, loadingTodos } = useSelector((state) => state.todo)
 
     const [pageNumber, setPageNumber] = useState(0)
     const [perPage, setPerPage] = useState(10)
@@ -29,26 +30,30 @@ export default function Todo() {
 
     useEffect(() => {
         setTotalPages(Math.ceil(totalTodosData / perPage))
-    }, [todo, perPage, totalTodosData])
+    }, [todos, perPage, totalTodosData])
 
     return (
         <div className="container mx-auto flex flex-row shadow-2xl rounded-lg">
             <Sidebar />
 
             <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
+                <HeaderTitle title={'Statistics'} />
+
+                <TodoGraph />
+
                 <HeaderTitle title={'Todo List'} />
 
                 <div className="container">
-                    {todo.loadingTodos ? (
+                    {loadingTodos ? (
                         <ReactLoading
                             type={'spinningBubbles'}
                             color={'black'}
                             height={90}
                             width={90}
-                            className="mx-auto mt-32"
+                            className="mx-auto mt-32 mb-32"
                         />
                     ) : (
-                        <div className="container">
+                        <div className="bg-gray-100 p-3 rounded-xl mt-5">
                             <table className="w-full mt-5 text-center">
                                 <thead className="text-gray-700">
                                     <tr>
@@ -58,7 +63,7 @@ export default function Todo() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {todo.todos.map((eachTodo, idx) => {
+                                    {todos.map((eachTodo, idx) => {
                                         return (
                                             <tr className="mt-3" key={'todo' + idx}>
                                                 <td>{eachTodo.id}.</td>
@@ -79,18 +84,18 @@ export default function Todo() {
                                     })}
                                 </tbody>
                             </table>
-
-                            <ReactPaginate
-                                previousLabel={'Previous'}
-                                nextLabel={'Next'}
-                                forcePage={pageNumber}
-                                pageCount={totalPages}
-                                onPageChange={({ selected }) => setPageNumber(selected)}
-                                containerClassName={'paginationContainer'}
-                                activeClassName={'paginationActive'}
-                            />
                         </div>
                     )}
+
+                    <ReactPaginate
+                        previousLabel={'Previous'}
+                        nextLabel={'Next'}
+                        forcePage={pageNumber}
+                        pageCount={totalPages}
+                        onPageChange={({ selected }) => setPageNumber(selected)}
+                        containerClassName={'paginationContainer'}
+                        activeClassName={'paginationActive'}
+                    />
                 </div>
             </div>
         </div>

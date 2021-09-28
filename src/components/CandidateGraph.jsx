@@ -2,7 +2,7 @@ import { Line } from 'react-chartjs-2'
 
 import { useSelector } from 'react-redux'
 
-export default function Graph() {
+export default function CandidateGraph() {
     const { acceptedCandidates, declinedCandidates } = useSelector((state) => state.candidate)
 
     const data = {

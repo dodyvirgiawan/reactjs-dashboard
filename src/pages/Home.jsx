@@ -7,7 +7,7 @@ import { fetchCandidates, acceptCandidate, declineCandidate } from '../store/can
 import ReactLoading from 'react-loading'
 import Sidebar from '../components/Sidebar'
 import HeaderTitle from '../components/HeaderTitle'
-import Graph from '../components/Graph'
+import CandidateGraph from '../components/CandidateGraph'
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -26,7 +26,7 @@ export default function Home() {
             <div className="w-5/6 rounded-tr-lg rounded-br-lg p-5 h-screen overflow-auto">
                 <HeaderTitle title={'Statistics'} />
 
-                <Graph />
+                <CandidateGraph />
 
                 <HeaderTitle title={'Candidate List'} />
 

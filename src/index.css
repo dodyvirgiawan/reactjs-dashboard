@@ -54,7 +54,8 @@ body {
 }
 
 .paginationContainer {
-    @apply mt-5;
+    @apply mt-10;
+    @apply mb-10;
     @apply flex;
     @apply justify-end;
 }
