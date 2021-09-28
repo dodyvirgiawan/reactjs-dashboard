@@ -60,7 +60,7 @@ export default function Todo() {
                             className="mx-auto mt-32 mb-32"
                         />
                     ) : (
-                        <div className="container w-full">
+                        <div className="container">
                             <input
                                 type="text"
                                 className="mt-5 p-3 mx-auto rounded-full border-0 bg-gray-100"
